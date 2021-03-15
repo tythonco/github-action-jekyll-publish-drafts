@@ -79,8 +79,9 @@ async function main() {
     let fileCount = 0;
     for await (const file of walk(`${folder}/_drafts`)) {
         if ((await fs.stat(file)).isDirectory()) continue;
-        fileCount++;
         const basename = path.basename(file);
+        if (!basename.endsWith('.md')) continue; // Only process markdown files
+        fileCount++;
 
         const content = await fs.readFile(file, "ascii");
         const parts = content.split(/---/g);

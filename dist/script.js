@@ -134,8 +134,10 @@ function main() {
                 const file = _c.value;
                 if ((yield fs_1.promises.stat(file)).isDirectory())
                     continue;
-                fileCount++;
                 const basename = path_1.default.basename(file);
+                if (!basename.endsWith('.md'))
+                    continue; // Only process markdown files
+                fileCount++;
                 const content = yield fs_1.promises.readFile(file, "ascii");
                 const parts = content.split(/---/g);
                 if (parts[0] == "" && parts[1] != "") {
