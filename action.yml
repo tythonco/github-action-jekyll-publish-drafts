@@ -22,4 +22,4 @@ inputs:
     default: '.'
 runs:
   using: 'node12'
-  main: 'script.js'
+  main: 'dist/script.js'
